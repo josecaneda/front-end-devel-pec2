@@ -57,9 +57,15 @@ class TransactionView {
             item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
 
             item.innerHTML = `
-                ${transaction.text} <span>${sign}${Math.abs(
+                <input type="text" name="transaction-text"
+                
+                value="${transaction.text}"></input>
+                
+                <input type="number" name="transaction-amount"
+                oninput="");"
+                value="${sign}${Math.abs(
                 transaction.amount
-                )}</span> <button class="delete-btn" onclick="removeTransaction(${
+                )}"></input> <button class="delete-btn" onclick="removeTransaction(${
                 transaction.id
                 })">x</button>
             `;
@@ -91,6 +97,18 @@ class TransactionView {
         
                 handler(id);
               }
+        });
+
+    }
+
+    bindEditTransaction(handler) {
+        this.list.addEventListener("focusout", event => {
+            const parentElement =  event.target.parentElement;
+            const id = parentElement.id;
+            const inputText = parentElement.querySelector("input[name='transaction-text']").value;
+            const inputAmount = parentElement.querySelector("input[name='transaction-amount']").value;
+            handler(id, inputText, inputAmount);
+
         });
 
     }
