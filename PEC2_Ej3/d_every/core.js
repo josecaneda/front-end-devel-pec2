@@ -18,7 +18,7 @@ function allSameType(input) {
 // greater than 0.
 
 function positiveMatrix(input) {
-  return input.every( value => [...value].every( _value => _value >= 0 ));
+  return input.every( value => [...value].every( _value => _value >= 0 ) );
 }
 
 // Check that all items in an array are strings
