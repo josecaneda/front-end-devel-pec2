@@ -433,8 +433,7 @@ describe('Zoo', function() {
         'Stephanie Strauss': ['giraffes'],
         'Sharonda Spry': ['otters', 'frogs'],
         'Ardith Azevado': ['tigers', 'bears'],
-        //'Emery Elser': ['elephants', 'bears', 'lions']
-        'Emery Elser': ['lions', 'bears', 'elephants']
+        'Emery Elser': ['elephants', 'bears', 'lions']
       };
 
       assert.deepEqual(actual, expected);
