@@ -80,7 +80,7 @@ function animalByName(animalName) {
   // your code here
   if (!animalName) return {};
   return animals.reduce( (searchedAnimal, {name, residents}) => {
-    const animalData = residents.filter( resident => animalName === resident.name )[0];
+    const animalData = residents.find( resident => animalName === resident.name )
     if (animalData) {
       const animalSpecie = { species: name};
       return Object.assign(animalData, animalSpecie);
@@ -98,7 +98,7 @@ function employeesByIds(ids) {
 function employeeByName(employeeName) {
   // your code here
   if (!employeeName) return {};
-  return employees.filter( ({firstName, lastName}) => firstName === employeeName || lastName === employeeName )[0];
+  return employees.find( ({firstName, lastName}) => firstName === employeeName || lastName === employeeName );
 }
 
 function managersForEmployee(idOrName) {
@@ -106,14 +106,14 @@ function managersForEmployee(idOrName) {
 
   function employeesByIds(ids) {
     // your code here
-    return employees.filter( ({id}) => {
+    return employees.find( ({id}) => {
       if (ids) return ids.includes(id);
     });
   }
 
-  let employee = employees.filter( ({id, firstName, lastName}) => [id, firstName, lastName].includes(idOrName) )[0];
+  let employee = employees.find( ({id, firstName, lastName}) => [id, firstName, lastName].includes(idOrName) );
   const managers = employee.managers.map( (id) =>  {
-    manager = employeesByIds(id)[0];
+    manager = employeesByIds(id);
     return `${manager.firstName} ${manager.lastName}`;
   });
   employee.managers = managers;
@@ -133,7 +133,7 @@ function employeeCoverage(idOrName) {
   function employeeByNameOrId(employeeNameOrId) {
     // your code here
     if (!employeeNameOrId) return {};
-    const employee = employees.filter( ({firstName, lastName, id}) => firstName === employeeNameOrId || lastName === employeeNameOrId || id === employeeNameOrId)[0];
+    const employee = employees.find( ({firstName, lastName, id}) => firstName === employeeNameOrId || lastName === employeeNameOrId || id === employeeNameOrId);
     return `${employee.firstName} ${employee.lastName}`;
   }
 
