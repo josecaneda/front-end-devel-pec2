@@ -94,7 +94,7 @@ li > input[type="number"] {
   margin: 2px;
 }
 
-li > input[type="number"] {
+li > input[name="transaction-amount"] {
   text-align: right;
 }
 

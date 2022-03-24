@@ -61,7 +61,6 @@ function animalMap(options) {
       } else if (options.sex) {
         addElement = residents.some( ({sex}) => sex === options.sex );
         animalsNames = name;
-        console.log(animalsNames);
       } else {
         animalsNames = name;
       }

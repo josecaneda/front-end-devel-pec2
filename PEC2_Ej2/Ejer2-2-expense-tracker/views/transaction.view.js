@@ -58,34 +58,32 @@ class TransactionView {
 
             item.innerHTML = `
                 <input type="text" name="transaction-text"
-                
                 value="${transaction.text}"></input>
-                
-                <input type="number" name="transaction-amount"
-                oninput="");"
-                value="${sign}${Math.abs(
-                transaction.amount
-                )}"></input> <button class="delete-btn" onclick="removeTransaction(${
-                transaction.id
-                })">x</button>
+                <input type="text" name="transaction-amount"
+                oninput="" 
+                value="${sign}${Math.abs(transaction.amount)}"></input>
+                <button class="delete-btn">x</button>
             `;
-
+ 
             this.list.appendChild(item);
 
         });
+
+
     }
 
     bindAddTransaction(handler) {
         this.form.addEventListener('submit', event => {
             event.preventDefault();
-            
+            if (text.value.trim() === '' || amount.value.trim() === '') {
+                alert('Please add a text and amount');
+              } else {
+                if (this._transactionText && this._transactionAmount) {
 
-            if (this._transactionText && this._transactionAmount) {
-
-                handler(this._transactionText, this._transactionAmount);
-                this._resetInputs();
-            }
-
+                    handler(this._transactionText, this._transactionAmount);
+                    this._resetInputs();
+                }
+              }
         });
 
     }
@@ -94,20 +92,25 @@ class TransactionView {
         this.list.addEventListener("click", event => {
             if (event.target.className === "delete-btn") {
                 const id = event.target.parentElement.id;
-        
                 handler(id);
               }
         });
-
     }
 
+   
     bindEditTransaction(handler) {
         this.list.addEventListener("focusout", event => {
             const parentElement =  event.target.parentElement;
             const id = parentElement.id;
             const inputText = parentElement.querySelector("input[name='transaction-text']").value;
             const inputAmount = parentElement.querySelector("input[name='transaction-amount']").value;
-            handler(id, inputText, inputAmount);
+            if (inputText.trim() === '' || inputAmount.trim() === '' || !parseFloat(inputAmount) ) {
+                alert('Please add a text and valid amount');
+                handler();
+                
+              } else {
+                handler(id, inputText, inputAmount);
+              }
 
         });
 
@@ -128,6 +131,9 @@ class TransactionView {
         this.money_minus.innerText = `$${expense}`;
     }
 
+    
+    
+    
     
 
 

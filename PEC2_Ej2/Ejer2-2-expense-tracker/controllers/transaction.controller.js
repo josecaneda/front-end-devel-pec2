@@ -26,14 +26,21 @@ class TransactionController {
     };
 
     handleAddTransaction = (transactionText, transactionAmount) => {
-        this.service.addTransaction(transactionText, transactionAmount)
-    }
+        this.service.addTransaction(transactionText, transactionAmount);
+    };
 
     handleDeleteTransaction = id => {
         this.service.deleteTransaction(id);
-    }
+    };
 
     handleEditTransaction = (id, transactionText, transactionAmount) => {
-        this.service.editTransaction(id, transactionText, transactionAmount)
-    }
+        if (id) {
+            this.service.editTransaction(id, transactionText, transactionAmount);
+        } else {
+            this.onTransactionListChanged(this.service.transactions);
+        }
+        
+    };
+
+
 }

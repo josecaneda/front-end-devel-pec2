@@ -16,7 +16,11 @@ function productAll(array) {
 
 function objectify(array) {
   // your code here
-  return Object.fromEntries(array);
+  //return Object.fromEntries(array);
+  return array.reduce((acc, [title, decade]) => {
+    acc[title] = decade;
+    return acc;
+  }, {});
 }
 
 function luckyNumbers(array) {
