@@ -42,7 +42,11 @@ class TransactionView {
 
         // Delete all nodes
         while (this.list.firstChild) {
-            this.list.removeChild(this.list.firstChild);
+            try {
+                this.list.removeChild(this.list.firstChild);
+            } catch(error) {
+                console.log(error);
+            }
         }
 
         // Create nodes
@@ -66,10 +70,7 @@ class TransactionView {
             `;
  
             this.list.appendChild(item);
-
         });
-
-
     }
 
     bindAddTransaction(handler) {
@@ -104,7 +105,7 @@ class TransactionView {
             const id = parentElement.id;
             const inputText = parentElement.querySelector("input[name='transaction-text']").value;
             const inputAmount = parentElement.querySelector("input[name='transaction-amount']").value;
-            if (inputText.trim() === '' || inputAmount.trim() === '' || !parseFloat(inputAmount) ) {
+            if (inputText.trim() === '' || inputAmount.trim() === '' || isNaN(inputAmount) ) {
                 alert('Please add a text and valid amount');
                 handler();
                 
@@ -113,7 +114,6 @@ class TransactionView {
               }
 
         });
-
     }
 
     // Update the balance, income and expense
@@ -130,13 +130,6 @@ class TransactionView {
         this.money_plus.innerText = `$${income}`;
         this.money_minus.innerText = `$${expense}`;
     }
-
-    
-    
-    
-    
-
-
 }
 
   
