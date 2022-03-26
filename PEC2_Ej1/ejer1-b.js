@@ -1,8 +1,8 @@
-let findOne = (list, { key, value }, { onSuccess, onError }) => {
+let findOne = (list, { key, value }) => {
   return new Promise( (resolve, reject) => {
     setTimeout(() => {
       const element = list.find(element => element[key] === value);
-      element ? resolve(onSuccess(element)) : resolve(onError({ msg: 'ERROR: Element Not Found' }));
+      element ? resolve(element) : reject({ msg: 'ERROR: Element Not Found' });
     }, 2000);
   });
 };
@@ -22,10 +22,14 @@ const users = [
 ];
 
 console.log('findOne success');
-findOne(users, { key: 'name', value: 'Carlos' }, { onSuccess, onError }).then();
+findOne(users, { key: 'name', value: 'Carlos' })
+  .then(response => onSuccess(response))
+  .catch(error => onError(error));
 
 console.log('findOne error');
-findOne(users, { key: 'name', value: 'Fermin' }, { onSuccess, onError }).then();
+findOne(users, { key: 'name', value: 'Fermin' })
+.then(response => onSuccess(response))
+.catch(error => onError(error));
 
 /*
 findOne success

@@ -1,8 +1,8 @@
-let findOne = (list, { key, value }, { onSuccess, onError }) => {
+let findOne = (list, { key, value }) => {
   return new Promise( (resolve, reject) => {
     setTimeout(() => {
       const element = list.find(element => element[key] === value);
-      element ? resolve(onSuccess(element)) : resolve(onError({ msg: 'ERROR: Element Not Found' }));
+      element ? resolve(element) : reject({ msg: 'ERROR: Element Not Found' });
     }, 2000);
   });
 };
@@ -21,16 +21,20 @@ const users = [
   }
 ];
 
-async function asyncCall() {
-  console.log('findOne success');
-  let p1 = findOne(users, { key: 'name', value: 'Carlos' }, { onSuccess, onError });
+async function asyncFindOne(list, { key, value }) {
+  try {
+    const user = await findOne(list, { key, value });
+    onSuccess(user);
 
-  console.log('findOne error');
-  let p2 = findOne(users, { key: 'name', value: 'Fermin' }, { onSuccess, onError });
-  await Promise.all([p1, p2]);
+  } catch(error) {
+    onError(error);
+  }
 }
-
-asyncCall();
+  
+console.log('findOne success');
+asyncFindOne(users, { key: 'name', value: 'Carlos' });
+console.log('findOne error');
+asyncFindOne(users, { key: 'name', value: 'Fermin' });
 
 /*
 findOne success
